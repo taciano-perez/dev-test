@@ -1,0 +1,37 @@
+apply plugin: 'java'
+ 
+version = '1.0'
+
+// create a single JAR with all dependencies
+task fatJar(type: Jar) {
+	manifest {
+		attributes 'Implementation-Title': 'Direct REST Microservice',
+			'Implementation-Version': version,
+			'Main-Class': 'goeuro.bus.direct.DirectMicroserviceApp'
+	}
+	baseName = project.name + '-all'
+	from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+	with jar
+}	
+
+// get dependencies from Maven central repository
+repositories {
+ mavenCentral()
+}
+
+dependencies {
+ // Jersey server
+ compile 'org.glassfish.jersey.containers:jersey-container-servlet:2.22.1'
+ 
+ // Jackson for Json transformations
+// compile 'org.glassfish.jersey.media:jersey-media-json-jackson:2.22.1'
+
+// Json
+compile 'javax.json:javax.json-api:1.0'
+ 
+ // Jetty like application server
+// compile 'org.eclipse.jetty:jetty-jsp:9.3.0.M1'
+   compile group: 'org.eclipse.jetty', name: 'jetty-server', version: '9.2.6.v20141205'
+   compile group: 'org.eclipse.jetty', name: 'jetty-servlet', version: '9.2.6.v20141205'
+   compile group: 'org.eclipse.jetty', name: 'jetty-http', version: '9.2.6.v20141205'
+}
