@@ -20,15 +20,18 @@ repositories {
 }
 
 dependencies {
- // Jersey server
- compile 'org.glassfish.jersey.containers:jersey-container-servlet:2.22.1'
+// Jersey server
+compile 'org.glassfish.jersey.containers:jersey-container-servlet:2.22.1'
  
 // Json
 compile 'javax.json:javax.json-api:1.0'
 compile 'org.glassfish:javax.json:1.0.4'
+
+// Jackson for Json transformations
+compile 'org.glassfish.jersey.media:jersey-media-json-jackson:2.22.1'
  
- // Jetty like application server
-   compile group: 'org.eclipse.jetty', name: 'jetty-server', version: '9.2.6.v20141205'
-   compile group: 'org.eclipse.jetty', name: 'jetty-servlet', version: '9.2.6.v20141205'
-   compile group: 'org.eclipse.jetty', name: 'jetty-http', version: '9.2.6.v20141205'
+// Jetty like application server
+compile group: 'org.eclipse.jetty', name: 'jetty-server', version: '9.2.6.v20141205'
+compile group: 'org.eclipse.jetty', name: 'jetty-servlet', version: '9.2.6.v20141205'
+compile group: 'org.eclipse.jetty', name: 'jetty-http', version: '9.2.6.v20141205'
 }
