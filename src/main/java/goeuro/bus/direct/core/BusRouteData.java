@@ -1,4 +1,4 @@
-package goeuro.bus.direct;
+package goeuro.bus.direct.core;
 
 import java.io.File;
 import java.util.HashMap;
