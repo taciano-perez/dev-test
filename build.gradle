@@ -25,6 +25,7 @@ dependencies {
  
 // Json
 compile 'javax.json:javax.json-api:1.0'
+compile 'org.glassfish:javax.json:1.0.4'
  
  // Jetty like application server
    compile group: 'org.eclipse.jetty', name: 'jetty-server', version: '9.2.6.v20141205'
