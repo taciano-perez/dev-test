@@ -25,32 +25,36 @@ public class DirectMicroserviceApp {
 		}
 		// parse data file
 		DirectRESTService.setDataFile(args[0]);
-		
+
 		// set context path to '/api'
-        ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
-        context.setContextPath("/api");
+		ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
+		context.setContextPath("/api");
 
-        // create Jetty server
-        Server jettyServer = new Server(8088);
-        jettyServer.setHandler(context);
-        ServletHolder jerseyServlet = context.addServlet(
-             org.glassfish.jersey.servlet.ServletContainer.class, "/*");
-        jerseyServlet.setInitOrder(0);
+		// create Jetty server
+		Server jettyServer = new Server(8088);
+		jettyServer.setHandler(context);
+		ServletHolder jerseyServlet = context.addServlet(
+		     org.glassfish.jersey.servlet.ServletContainer.class, "/*");
+		jerseyServlet.setInitOrder(0);
+		// register Jackson
+		jerseyServlet.setInitParameter(org.glassfish.jersey.server.ServerProperties.PROVIDER_PACKAGES,
+			"com.fasterxml.jackson.jaxrs.json;"
+			+ "jersey.jetty.embedded");
 
-        // load our REST service.
-        jerseyServlet.setInitParameter(
-           "jersey.config.server.provider.classnames",
-           DirectRESTService.class.getCanonicalName());
+		// load our REST service
+		jerseyServlet.setInitParameter(
+		   "jersey.config.server.provider.classnames",
+		   DirectRESTService.class.getCanonicalName());
 
-        // start server
-        try {
-            jettyServer.start();
-            jettyServer.join();
-        } catch (Exception e) {
-        	System.err.println("Error starting embedded Jetty server: " + e);
-        } finally {
-            jettyServer.destroy();
-        }
+		// start Jetty server
+		try {
+		    jettyServer.start();
+		    jettyServer.join();
+		} catch (Exception e) {
+			System.err.println("Error starting embedded Jetty server: " + e);
+		} finally {
+		    jettyServer.destroy();
+		}
 	}
 
 }
