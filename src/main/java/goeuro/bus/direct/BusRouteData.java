@@ -12,8 +12,8 @@ import java.util.stream.Collectors;
  * It is intended to be used as a singleton. Before performing queries, data must be loaded using the parseBusRouteData method.
  * Method hasConnection then can be used to check if two stations have a direct connection by any bus route.
  * <p>In order to make queries faster, we store sets of bus routes indexed by station (an inverted index of the data file),
- * and intersect these sets to check if there is a set containing both dep_sid and arr_sid. If there is at least one intersecting set,
- * there is a direct bus route between dep_sid and arr_sid. 
+ * and intersect these sets to check if there is one containing both dep_sid and arr_sid. If there is at least 
+ * one element at the intersecting set, there is a direct bus route between dep_sid and arr_sid. 
  * @author Taciano Perez
  */
 public class BusRouteData {
