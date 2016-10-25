@@ -1,8 +1,7 @@
-package goeuro.bus.direct;
+package goeuro.bus.direct.service;
 
-import javax.json.Json;
-import javax.json.JsonObject;
-import javax.json.JsonObjectBuilder;
+import goeuro.bus.direct.core.BusRouteData;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -56,7 +55,7 @@ public class DirectRESTService {
         System.out.println("Parsing data file");
         data = new BusRouteData();
         // parse file
-            data.parseBusRouteData(filePath);
+        data.parseBusRouteData(filePath);
     }
 	
     /**
@@ -74,9 +73,9 @@ public class DirectRESTService {
     @GET
     @Consumes( {MediaType.TEXT_PLAIN, MediaType.TEXT_PLAIN})
     @Produces("application/json")
-    public String getJson( @QueryParam("dep_sid") String dep_sid, @QueryParam("arr_sid") String arr_sid) {
+    public DirectRESTServiceResponse getJson( @QueryParam("dep_sid") String dep_sid, @QueryParam("arr_sid") String arr_sid) {
     	// get answer from data
-    	Integer depSidInt, arrSidInt;
+    	Integer depSidInt = null, arrSidInt = null;
     	boolean hasDirectConnection = false;
     	try {
 	    	depSidInt = Integer.valueOf(dep_sid);
@@ -85,21 +84,12 @@ public class DirectRESTService {
     	} catch (NumberFormatException nfe) {
     		System.err.println("Error parsing input arguments on DirectRESTService.");
     	}
-    	System.out.println("dep="+dep_sid+" arr="+arr_sid);
-    	System.out.println("direct_route=" + hasDirectConnection);
     	
-    	// ensure we don't throw an exception if an the input parameter is missing
-    	if (dep_sid == null) dep_sid = "null";
-    	if (arr_sid == null) arr_sid = "null";
-    	
-    	// build a JSON response
-    	JsonObjectBuilder responseBuilder = Json.createObjectBuilder();
-    	responseBuilder.add("dep_sid", dep_sid);
-    	responseBuilder.add("arr_sid", arr_sid);
-    	responseBuilder.add("direct_bus_route", hasDirectConnection);
-    	JsonObject response = responseBuilder.build();
-    	
-    	return response.toString();
+    	DirectRESTServiceResponse response = new DirectRESTServiceResponse();
+    	response.setDep_sid(depSidInt);
+    	response.setArr_sid(arrSidInt);
+    	response.setDirect_bus_route(hasDirectConnection);
+    	return response;
     }
 
 }
