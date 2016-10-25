@@ -1,4 +1,4 @@
-package goeuro.bus.direct;
+package goeuro.bus.direct.service;
 
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
