@@ -1,4 +1,4 @@
-package goeuro.bus.direct;
+package goeuro.bus.direct.core;
 
 import java.util.HashSet;
 import java.util.Set;
