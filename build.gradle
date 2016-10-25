@@ -7,7 +7,7 @@ task fatJar(type: Jar) {
 	manifest {
 		attributes 'Implementation-Title': 'Direct REST Microservice',
 			'Implementation-Version': version,
-			'Main-Class': 'goeuro.bus.direct.DirectMicroserviceApp'
+			'Main-Class': 'goeuro.bus.direct.service.DirectMicroserviceApp'
 	}
 	baseName = project.name + '-all'
 	from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
