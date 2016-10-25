@@ -43,22 +43,21 @@ import javax.ws.rs.core.MediaType;
 @Path(value="direct")
 public class DirectRESTService {
 	
-	/**
-	 * Singleton of BusRouteData who does the actual search for bus routes.
-	 */
-	private static BusRouteData data;
+    /**
+     * Singleton of BusRouteData who does the actual search for bus routes.
+     */
+    private static BusRouteData data;
 
-	/**
-	 * Path of the file containing the bus route/station data.
-	 */
-	private static final String DATA_FILE = "d://temp//testfile.txt"; 
-	
-	static {	// load file data into singleton 
-		System.out.println("Parsing data file");
-		data = new BusRouteData();
-		// parse file
-		data.parseBusRouteData(DATA_FILE);
-	}
+    /**
+     * Set the path of the file containing the bus route/station data, 
+     * and parse the file.
+     */
+    public static void setDataFile(String filePath) { 
+        System.out.println("Parsing data file");
+        data = new BusRouteData();
+        // parse file
+            data.parseBusRouteData(filePath);
+    }
 	
     /**
      * Default constructor. 
