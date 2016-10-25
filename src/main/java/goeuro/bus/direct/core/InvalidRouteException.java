@@ -1,4 +1,4 @@
-package goeuro.bus.direct;
+package goeuro.bus.direct.core;
 
 /**
  * Exception thrown when parsing an invalid route entry. 
